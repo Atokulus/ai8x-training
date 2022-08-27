@@ -93,17 +93,17 @@ from torch import nn
 from torch.backends import cudnn
 
 # pylint: disable=wrong-import-order
-import distiller
-import examples.auto_compression.amc as adc
+import distiller.distiller as distiller
+import distiller.examples.auto_compression.amc as adc
 import shap
 import torchnet.meter as tnt
-from distiller import apputils, model_summaries
-from distiller.data_loggers import PythonLogger, TensorBoardLogger
+from distiller.distiller import apputils, model_summaries
+from distiller.distiller.data_loggers import PythonLogger, TensorBoardLogger
 # pylint: disable=no-name-in-module
-from distiller.data_loggers.collector import (QuantCalibrationStatsCollector,
+from distiller.distiller.data_loggers.collector import (QuantCalibrationStatsCollector,
                                               RecordsActivationStatsCollector,
                                               SummaryActivationStatsCollector, collectors_context)
-from distiller.quantization.range_linear import PostTrainLinearQuantizer
+from distiller.distiller.quantization.range_linear import PostTrainLinearQuantizer
 
 # pylint: enable=no-name-in-module
 import ai8x

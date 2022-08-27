@@ -31,10 +31,9 @@ import argparse
 import os
 
 # pylint: disable=wrong-import-order
-import distiller
-import distiller.quantization
-from distiller.utils import float_range_argparse_checker as float_range
-from examples.auto_compression.amc import amc_args as adc
+from distiller.distiller import quantization, knowledge_distillation, pruning
+from distiller.distiller import float_range_argparse_checker as float_range
+from distiller.examples.auto_compression.amc import amc_args as adc
 
 from devices import device
 
@@ -246,8 +245,8 @@ def get_parser(model_names, dataset_names):
                                     help='path to YAML file that defines the '
                                     'parameters for Objetc Detection Loss and NMS')
 
-    distiller.knowledge_distillation.add_distillation_args(parser, model_names, True)
-    distiller.quantization.add_post_train_quant_args(parser)
-    distiller.pruning.greedy_filter_pruning.add_greedy_pruner_args(parser)
+    knowledge_distillation.add_distillation_args(parser, model_names, True)
+    quantization.add_post_train_quant_args(parser)
+    pruning.greedy_filter_pruning.add_greedy_pruner_args(parser)
     adc.add_automl_args(parser)
     return parser
