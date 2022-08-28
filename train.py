@@ -1114,9 +1114,6 @@ def _validate(data_loader, model, criterion, loggers, args, epoch=-1, tflogger=N
                     scaled_output = output.cpu().clone()
                     scaled_target = target.cpu().clone()
 
-                    print(scaled_target.shape)
-                    print(torch.min(scaled_target), torch.max(scaled_target))
-
                     for i in range(scaled_input.shape[0]):
                         save_image(scaled_input[i] / 128 + 1.0, Path(msglogger.logdir) / f"test_in_{i}.png")
                         save_image(scaled_output[i] / 2, Path(msglogger.logdir) / f"test_out_{i}.png")
