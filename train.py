@@ -65,6 +65,7 @@ import fnmatch
 import logging
 import operator
 import os
+from pathlib import Path
 import sys
 import time
 import traceback
@@ -91,6 +92,9 @@ import torch.optim
 import torch.utils.data
 from torch import nn
 from torch.backends import cudnn
+
+from torch.nn.functional import normalize
+from torchvision.utils import save_image
 
 # pylint: disable=wrong-import-order
 import distiller.distiller as distiller
@@ -1104,6 +1108,19 @@ def _validate(data_loader, model, criterion, loggers, args, epoch=-1, tflogger=N
                         if (hasattr(model.__dict__['_modules'][key], 'wide')
                                 and model.__dict__['_modules'][key].wide):
                             output /= 256.
+
+                if args.evaluate:
+                    scaled_input = inputs.cpu().clone()
+                    scaled_output = output.cpu().clone()
+                    scaled_target = target.cpu().clone()
+
+                    print(scaled_target.shape)
+                    print(torch.min(scaled_target), torch.max(scaled_target))
+
+                    for i in range(scaled_input.shape[0]):
+                        save_image(scaled_input[i] / 128 + 1.0, Path(msglogger.logdir) / f"test_in_{i}.png")
+                        save_image(scaled_output[i] / 2, Path(msglogger.logdir) / f"test_out_{i}.png")
+                        save_image(scaled_target[i] / 2, Path(msglogger.logdir) / f"test_target_{i}.png")
 
             if args.generate_sample is not None:
                 sample.generate(args.generate_sample, inputs, target, output, args.dataset, False)
