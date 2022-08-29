@@ -145,11 +145,11 @@ class AI85UNetLarge(nn.Module):
     """
     def __init__(
             self,
-            num_classes=4,
+            num_classes=3,
             num_channels=48,
             dimensions=(88, 88),  # pylint: disable=unused-argument
             bias=True,
-            fold_ratio=4,
+            fold_ratio=2,
             **kwargs
     ):
         super().__init__()
