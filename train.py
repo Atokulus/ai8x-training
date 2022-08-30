@@ -1116,7 +1116,7 @@ def _validate(data_loader, model, criterion, loggers, args, epoch=-1, tflogger=N
 
                     for i in range(scaled_input.shape[0]):
                         save_image(scaled_input[i] / 128 + 1.0, Path(msglogger.logdir) / f"test_in_{i}.png")
-                        save_image(scaled_output[i,2], Path(msglogger.logdir) / f"test_out_{i}.png")
+                        save_image(scaled_output[i], Path(msglogger.logdir) / f"test_out_{i}.png")
                         save_image(scaled_target[i] / 2, Path(msglogger.logdir) / f"test_target_{i}.png")
 
             if args.generate_sample is not None:
