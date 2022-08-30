@@ -91,8 +91,8 @@ class WeedDataset(torch.utils.data.Dataset):
         if self.platform_transform is not None:
             transformed_image = self.platform_transform(transformed_image)
 
-        save_image(transformed_image.clone() / 2 + 0.5, f"input_{idx}.png")
-        save_image(transformed_mapped_annotation.clone() / 2, f"target_{idx}.png")
+        #save_image(transformed_image.clone() / 2 + 0.5, f"input_{idx}.png")
+        #save_image(transformed_mapped_annotation.clone() / 2, f"target_{idx}.png")
 
         return transformed_image, transformed_mapped_annotation
 
